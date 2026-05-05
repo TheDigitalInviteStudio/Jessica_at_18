@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jessica @ 18</title>
+    <link rel="icon" type="image/png" href="debutlogo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400..900;1,700..900&display=swap" rel="stylesheet">
+    
+    <!-- Primary Meta Tags -->
+    <title>Freyja @ 18</title>
+    <meta name="title" content="Freyja @ 18" />
+    <meta name="description" content="Debut Invitation" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://thedigitalinvitestudio.github.io/Freyja_at_18/" />
+    <meta property="og:title" content="Freyja @ 18" />
+    <meta property="og:description" content="Debut Invitation" />
+    <meta property="og:image" content="https://TheDigitalInviteStudio.github.io/Freyja_at_18/Freyja.png">
+
+    <!-- X (Twitter) -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://thedigitalinvitestudio.github.io/Freyja_at_18/" />
+    <meta property="twitter:title" content="Freyja @ 18" />
+    <meta property="twitter:description" content="Debut Invitation" />
+    <meta property="og:image" content="https://TheDigitalInviteStudio.github.io/Freyja_at_18/Freyja.png">
+
+<!-- Meta Tags Generated with https://metatags.io -->
+
+    <style>
+        :root {
+            --espresso: #f2eee7; 
+            --bronze: #CD7F32;
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
+            background-color: #f2eee7;
+            overflow: hidden;
+            display: flex; justify-content: center; align-items: center;
+        }
+
+        #transition-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: #f2eee7; /* Back to Espresso for the final transition */
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        #preloader {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background-color: #fdfaf5; 
+            display: flex; justify-content: center; align-items: center;
+            z-index: 1000000; 
+            transition: opacity 0.8s ease;
+        }
+
+        .loader-content {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            color: #aa8844;
+        }
+
+
+        .logo-circle {
+            width: 120px; height: 120px;
+            border: 1px solid var(--bronze);
+            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            animation: pulse 2.5s infinite ease-in-out;
+            padding: 15px; box-sizing: border-box;
+        }
+
+        .logo-circle img { width: 100%; height: auto; object-fit: contain; }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(0.98); opacity: 0.6; }
+            50% { transform: scale(1.05); opacity: 1; }
+        }
+
+
+        .fade-out-loader {
+             opacity: 0;
+             pointer-events: none;
+        }
+
+        #splash-page {
+            display: none;
+            opacity: 0;
+            transition: opacity 1.2s ease;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .invited-header {
+            font-family: 'Pinyon Script', cursive;
+            font-size: clamp(2.5rem, 8vw, 3.5rem);
+            color: #e5aaae; /* Changed to Espresso for better contrast */
+            margin-bottom: 25px;
+        }
+
+        .envelope-wrapper {
+            position: relative;
+            width: 90vw;
+            max-width: 380px;
+            height: 280px;
+            perspective: 2500px; 
+            cursor: pointer;
+        }
+
+        .envelope-base {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            z-index: 1;
+        }
+
+        .envelope-flap {
+            position: absolute;
+            top: 20.5%; /* Reset to 0 for a cleaner hinge */
+            left: 0;
+            width: 100%;
+            z-index: 5; 
+            transform-origin: center top;
+            /* Smoother easing for the flip */
+            transition: transform 1.5s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+            transform-style: preserve-3d;
+        }
+
+        .envelope-base img, .envelope-flap img {
+            width: 100%; height: auto; display: block;
+        }
+
+        #wax-seal {
+            position: absolute;
+            width: 75px; 
+            top: 45%; /* Adjusted for better placement over the flap tip */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            transition: opacity 0.3s ease; /* Faster hide when clicked */
+        }
+
+        .is-open .envelope-flap {
+            /* Changing 150deg to -150deg makes it swing TOWARD the user */
+            transform: rotateX(-150deg);
+            z-index: 10; /* Keep it high so it stays in front during the swing */
+        }
+
+        .is-open #wax-seal {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .open-text {
+            position: absolute; 
+            bottom: -40px; left: 50%;
+            transform: translateX(-50%);
+            color: #aa8844;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 3px; font-size: 0.75rem;
+            transition: opacity 0.3s;
+        }
+
+        .is-open .open-text {
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="transition-overlay"></div>
+
+    <div id="preloader">
+        <div class="logo-circle">
+            <img src="logo.png" alt="Logo">
+        </div> 
+        <div style="margin-top:20px; color:var(--bronze); letter-spacing:5px; font-size:0.7rem;">PREPARING</div>
+    </div>
+
+    <style>
+    /* Add this to ensure the content stays centered */
+    #preloader {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw; height: 100vh;
+        background-color: #fdfaf5; 
+        display: flex; flex-direction: column; /* Stack logo and text */
+        justify-content: center; align-items: center;
+        z-index: 1000000; 
+        transition: opacity 0.8s ease;
+    }
+    </style>
+
+    <div id="splash-page">
+        <h1 class="invited-header">You are invited</h1>
+        <div class="envelope-wrapper" id="envelope">
+            <div class="envelope-base">
+                <img src="5.png" alt="Base">
+            </div>
+            
+            <div class="envelope-flap">
+                <img src="6.png" alt="Flap">
+            </div>
+            
+            <img src="7.png" alt="Seal" id="wax-seal">
+            
+            <div class="open-text">TAP TO OPEN</div>
+        </div>
+    </div>
+
+    <script>
+        const preloader = document.getElementById('preloader');
+        const splash = document.getElementById('splash-page');
+        const envelope = document.getElementById('envelope');
+        const overlay = document.getElementById('transition-overlay');
+
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                if (preloader) preloader.classList.add('fade-out-loader');
+                setTimeout(() => {
+                    if (preloader) preloader.style.display = 'none';
+                    splash.style.display = 'block';
+                    setTimeout(() => { splash.style.opacity = '1'; }, 50);
+                }, 800); 
+            }, 1500); 
+        });
+
+        if (envelope) {
+            envelope.addEventListener('click', () => {
+                envelope.classList.add('is-open');
+
+                setTimeout(() => {
+                    overlay.style.opacity = '1';
+                }, 2200); 
+
+                setTimeout(() => {
+                    window.location.href = "https://letshenskidesign.my.canva.site/jessica-18";
+                }, 3500); 
+            });
+        }
+    </script>
+</body>
+</html>
